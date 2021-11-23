@@ -6,6 +6,7 @@ from advertisements.models import Advertisement
 from advertisements.serializers import AdvertisementSerializer
 from django_filters import rest_framework as filters
 from advertisements.filters import AdvertisementFilter
+from advertisements.permissions import IsAuthOrReadOnly
 
 
 class AdvertisementViewSet(ModelViewSet):
