@@ -17,7 +17,7 @@ class AdvertisementViewSet(ModelViewSet):
 
     def perform_destroy(self, instance):
         if instance.creator != self.request.user:
-            raise ValidationError("Not your advertisement")
+            raise ValidationError("Ошибка. Не Ваше объявление")
         else:
             instance.delete()
 
