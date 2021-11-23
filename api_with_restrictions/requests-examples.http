@@ -11,23 +11,31 @@ Content-Type: application/json
 # создание объявления
 POST {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token c06340b4b90b4f92cd03d6a9501c6f96a68c55c1
+Authorization: Token 6f802ee27c7738b5bc36cdeb5b4b59c0e0228c1a
 
 {
-  "title": "Стул",
+  "title": "Стол",
   "description": "Продам срочно"
 }
 
 ###
 
 # попытка поменять объявление
-PATCH {{baseUrl}}/advertisements/1/
+PATCH {{baseUrl}}/advertisements/43/
 Content-Type: application/json
 Authorization: Token 6f802ee27c7738b5bc36cdeb5b4b59c0e0228c1a
 
 {
   "status": "CLOSED"
 }
+
+
+###
+
+# попытка удалить объявление
+DELETE {{baseUrl}}/advertisements/43/
+Content-Type: application/json
+Authorization: Token c06340b4b90b4f92cd03d6a9501c6f96a68c55c1
 
 ###
 
