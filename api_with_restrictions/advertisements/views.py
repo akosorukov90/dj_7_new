@@ -6,6 +6,7 @@ from advertisements.models import Advertisement
 from advertisements.serializers import AdvertisementSerializer
 from django_filters import rest_framework as filters
 from advertisements.filters import AdvertisementFilter
+from advertisements.permissions import IsAuthor
 
 
 class AdvertisementViewSet(ModelViewSet):
@@ -15,14 +16,10 @@ class AdvertisementViewSet(ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = AdvertisementFilter
 
-    def perform_destroy(self, instance):
-        if instance.creator != self.request.user:
-            raise ValidationError("Ошибка. Не Ваше объявление")
-        else:
-            instance.delete()
-
     def get_permissions(self):
         """Получение прав для действий."""
-        if self.action in ["create", "update", "partial_update"]:
+        if self.action in ["create"]:
             return [IsAuthenticated()]
+        elif self.action in ["destroy", "update", "partial_update"]:
+            return [IsAuthor()]
         return []
